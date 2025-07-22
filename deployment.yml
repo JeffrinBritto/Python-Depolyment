@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: emoji
-        image: emoji:latest
+        image: jeffrinbritto/emoji-app
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
