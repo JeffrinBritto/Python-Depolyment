@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emoji Overlay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Emoji Overlay Tool</h1>
+    <form id="upload-form">
+      <input type="file" id="image-input" accept="image/*" required />
+      <input type="text" id="emoji-input" placeholder="Enter Emoji (e.g. 😎)" value="😎" />
+      <button type="submit">Upload and Add Emoji</button>
+    </form>
+    <div id="result">
+      <h2>Result:</h2>
+      <img id="result-image" src="" alt="Result will appear here..." />
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById("upload-form");
+    const resultImg = document.getElementById("result-image");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const imageFile = document.getElementById("image-input").files[0];
+      const emoji = document.getElementById("emoji-input").value;
+
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append("emoji", emoji);
+
+      const response = await fetch("/api/add-emoji", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        resultImg.src = imageUrl;
+      } else {
+        alert("Failed to process image.");
+      }
+    });
+  </script>
+</body>
+</html>
