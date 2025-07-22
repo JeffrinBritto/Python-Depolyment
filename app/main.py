@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from app.api import router as emoji_router
+from app.app import router as emoji_router
 
 app = FastAPI(title="Emoji Overlay Service")
 
