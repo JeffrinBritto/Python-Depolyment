@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emoji-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emoji
+  template:
+    metadata:
+      labels:
+        app: emoji
+    spec:
+      containers:
+      - name: emoji
+        image: emoji:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
