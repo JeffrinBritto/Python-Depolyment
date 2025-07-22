@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File
 from fastapi.responses import StreamingResponse
-from app.emoji_overlay import add_emoji_to_image
+from .emoji_overlay import add_emoji_to_image
 
 router = APIRouter()
 
